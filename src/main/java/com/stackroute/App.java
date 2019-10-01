@@ -15,18 +15,13 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println("Using bean definition registry and bean definition reader...");
-        GenericApplicationContext genericApplicationContext = new GenericApplicationContext();
-        AnnotatedBeanDefinitionReader beanDefinitionReader = new AnnotatedBeanDefinitionReader(genericApplicationContext);
-        beanDefinitionReader.register(AppConfig.class);
-        beanDefinitionReader.register(Actor.class);
-        genericApplicationContext.refresh();
-        Movie movieBeanDefinitionReader = genericApplicationContext.getBean(Movie.class);
-        System.out.println(movieBeanDefinitionReader.toString());
-
         System.out.println("Using Application Context interface...");
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-        Movie movie = applicationContext.getBean(Movie.class);
-        System.out.println(movie.toString());
+        Movie movieA = applicationContext.getBean("movieA", Movie.class);
+        System.out.println(movieA.toString());
+        Movie movieB = applicationContext.getBean("movieB", Movie.class);
+        System.out.println(movieB.toString());
+
+        System.out.println(movieA == movieB);
     }
 }
