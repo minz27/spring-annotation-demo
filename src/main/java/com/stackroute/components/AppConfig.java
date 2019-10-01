@@ -11,12 +11,17 @@ public class AppConfig {
     @Bean(name = {"movieA", "movieB"})
     @Scope(value = "prototype")
     public Movie getMovie(){
-        Movie movie = new Movie(getActor());
+        Movie movie = new Movie();
         return movie;
     }
-    @Bean
+    @Bean(name="actor1")
     public Actor getActor(){
         Actor actor = new Actor("George Clooney", "Male", 63);
+        return actor;
+    }
+    @Bean
+    public Actor getActor2(){
+        Actor actor = new Actor("Scarlett Johanson", "Female", 40);
         return actor;
     }
 
