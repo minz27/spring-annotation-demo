@@ -3,13 +3,14 @@ package com.stackroute.components;
 import com.stackroute.domain.Actor;
 import com.stackroute.domain.Movie;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
+@ComponentScan(basePackages = "com.stackroute")
 public class AppConfig {
     @Bean(name = {"movieA", "movieB"})
-    @Scope(value = "prototype")
     public Movie getMovie(){
         Movie movie = new Movie();
         return movie;
@@ -24,5 +25,6 @@ public class AppConfig {
         Actor actor = new Actor("Scarlett Johanson", "Female", 40);
         return actor;
     }
+
 
 }

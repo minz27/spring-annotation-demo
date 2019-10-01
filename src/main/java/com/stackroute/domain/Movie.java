@@ -6,10 +6,11 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 
-public class Movie implements ApplicationContextAware, BeanFactoryAware, BeanNameAware {
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+public class Movie {
 
     private Actor actor;
     @Autowired
@@ -24,19 +25,12 @@ public class Movie implements ApplicationContextAware, BeanFactoryAware, BeanNam
                 "actor=" + actor.toString() +
                 '}';
     }
-
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.out.println("Bean factory: " + beanFactory);
+    @PostConstruct
+    public void init(){
+        System.out.println("Custom init-method called");
     }
-
-    @Override
-    public void setBeanName(String s) {
-        System.out.println("Bean Name: " + s);
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        System.out.println("Application Context: " + applicationContext);
+    @PreDestroy
+    public void destroy(){
+        System.out.println("Custom destroy-method called");
     }
 }
